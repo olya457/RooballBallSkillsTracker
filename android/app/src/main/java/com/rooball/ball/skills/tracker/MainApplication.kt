@@ -1,4 +1,4 @@
-package com.rooballballskillstracker
+package com.rooball.ball.skills.tracker
 
 import android.app.Application
 import com.facebook.react.PackageList

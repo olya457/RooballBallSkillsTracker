@@ -1,4 +1,4 @@
-package com.rooballballskillstracker
+package com.rooball.ball.skills.tracker
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

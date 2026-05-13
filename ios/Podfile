@@ -31,5 +31,20 @@ target 'RooballBallSkillsTracker' do
       :mac_catalyst_enabled => false,
       # :ccache_enabled => true
     )
+
+    # Work around Xcode 26.4+ Apple Clang rejecting fmt 11.0.2 consteval checks.
+    fmt_base_header = File.join(installer.sandbox.pod_dir('fmt'), 'include', 'fmt', 'base.h')
+    if File.exist?(fmt_base_header)
+      fmt_base = File.read(fmt_base_header)
+      patched_fmt_base = fmt_base.gsub(
+        /^#\s*define FMT_USE_CONSTEVAL 1$/,
+        '#  define FMT_USE_CONSTEVAL 0'
+      )
+
+      if patched_fmt_base != fmt_base
+        File.chmod(0644, fmt_base_header)
+        File.write(fmt_base_header, patched_fmt_base)
+      end
+    end
   end
 end
